@@ -1,5 +1,4 @@
 def retry(max_retries, exc):
-
     def decorator(func):
 
         def inner(*args, **kwargs):
@@ -8,12 +7,12 @@ def retry(max_retries, exc):
                 try:
                     result = func(*args, **kwargs)
                     return result
-                except ValueError:
-                    if retries == max_retries:
-                        return exc
-                    print("Input is not a number.")
+                except Exception:
                     retries += 1
+            return exc
+
         return inner
+
     return decorator
 
 
